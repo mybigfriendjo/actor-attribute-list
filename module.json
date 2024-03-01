@@ -25,9 +25,9 @@
       }
     ]
   },
-  "url": "https://raw.githubusercontent.com/mybigfriendjo/5e-actor-attributes",
+  "url": "https://github.com/mybigfriendjo/5e-actor-attributes",
   "manifest": "https://raw.githubusercontent.com/mybigfriendjo/5e-actor-attributes/main/module.json",
-  "download": "",
+  "download": "https://github.com/mybigfriendjo/5e-actor-attributes/archive/main.zip",
   "esmodules": ["scripts/5e-actor-attributes.js"],
   "styles": ["styles/5e-actor-attributes.css"],
   "languages": [
