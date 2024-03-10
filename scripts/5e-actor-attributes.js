@@ -1,12 +1,9 @@
 const MODULE_NAME = "5e-actor-attributes";
 
 export class AttributeViewer extends Application {
-  static characterName = "";
-
   constructor(actor) {
     super();
     this.actor = actor;
-    this.characterName = actor.name;
   }
 
   static get defaultOptions() {
@@ -18,11 +15,13 @@ export class AttributeViewer extends Application {
       resizable: true,
       editable: false,
       height: 600,
-      title:
-        game.i18n.localize("attributeViewer.appTitle") +
-        " " +
-        this.characterName,
     });
+  }
+
+  get title() {
+    return (
+      game.i18n.localize("attributeViewer.appTitle") + " " + this.actor.name
+    );
   }
 
   _buildAttributeStrings(currentAttribute, previousString) {
