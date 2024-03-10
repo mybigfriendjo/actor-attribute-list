@@ -2,7 +2,7 @@
 
 Lists all Attributes of a dnd5e Actor Sheet.
 
-Inspired by [Actor Attribute Lists](https://github.com/relick/FoundryVTT-Actor-Attribute-Lists) Module by [relick](https://github.com/relick) which was seemingly abandoned.
+Inspired by [Actor Attribute Lists](https://github.com/relick/FoundryVTT-Actor-Attribute-Lists) Module.
 
 ## Installation
 
