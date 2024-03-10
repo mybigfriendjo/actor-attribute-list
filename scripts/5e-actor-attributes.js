@@ -24,14 +24,14 @@ export class AttributeViewer extends Application {
     );
   }
 
-  _buildAttributeStrings(currentAttribute, previousString) {
+  _generateAttributes(currentAttribute, previousString) {
     let attributes = [];
     const type = typeof currentAttribute;
     if (type === "object") {
       for (const key in currentAttribute) {
         const str = previousString + "." + key;
         attributes = attributes.concat(
-          this._buildAttributeStrings(currentAttribute[key], str)
+          this._generateAttributes(currentAttribute[key], str)
         );
       }
     } else if (type === "string") {
@@ -51,12 +51,12 @@ export class AttributeViewer extends Application {
     return attributes;
   }
 
-  _getAttributeCategories(rollData) {
+  _generateCategories(rollData) {
     const categories = [];
     for (const key in rollData) {
       categories.push({
         categoryName: key,
-        attributes: this._buildAttributeStrings(rollData[key], key),
+        attributes: this._generateAttributes(rollData[key], key),
       });
     }
     return categories;
@@ -65,7 +65,7 @@ export class AttributeViewer extends Application {
   getData() {
     const data = {
       actorName: this.actor.name,
-      categories: this._getAttributeCategories(this.actor.getRollData()),
+      categories: this._generateCategories(this.actor.getRollData()),
     };
     return data;
   }
