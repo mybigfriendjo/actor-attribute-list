@@ -1,0 +1,20 @@
+<div>
+    <h2>{{localize "attributeViewer.contentHeader"}} {{actorName}}</h3>
+        {{#each categories}}
+        <div class="attribute-viewer-category">
+            <h3>{{this.categoryName}}</h3>
+            <table>
+                <tr>
+                    <th>{{localize "attributeViewer.tableHeaderAttribute"}}</th>
+                    <th>{{localize "attributeViewer.tableHeaderValue"}}</th>
+                </tr>
+                {{#each attributes}}
+                <tr>
+                    <td><input type="text" value="@{{this.attName}}" readonly /></td>
+                    <td>{{this.attValue}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        {{/each}}
+</div>

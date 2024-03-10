@@ -1,0 +1,11 @@
+{
+  "actorSheet": {
+    "headerButtonLabel": "Show Attributes"
+  },
+  "attributeViewer": {
+    "appTitle": "Attributes for",
+    "contentHeader": "Attributes for",
+    "tableHeaderAttribute": "Attribute",
+    "tableHeaderValue": "Value"
+  }
+}
