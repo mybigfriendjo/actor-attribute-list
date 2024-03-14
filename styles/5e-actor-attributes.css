@@ -1,3 +1,11 @@
 .attribute-viewer-category {
-    margin-top: 2em;
+  margin-top: 2em;
+}
+
+.key-width {
+  width: 70%;
+}
+
+.value-width {
+  width: 30%;
 }
