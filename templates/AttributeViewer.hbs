@@ -1,5 +1,6 @@
 <div>
-    <h2>{{localize "attributeViewer.contentHeader"}} {{actorName}}</h3>
+    <h2>{{localize "actor-attribute-list.attributeViewer.contentHeader"}} {{actorName}}</h3>
+        <input id="attributeListFilter" type="text" placeholder="{{localize "actor-attribute-list.attributeViewer.filterPlaceholder"}}" />
         {{#each categories}}
         <div class="attribute-viewer-category">
             <h3>{{this.categoryName}}</h3>
@@ -8,17 +9,50 @@
                     <col class="key-width" />
                     <col class="value-width" />
                 </colgroup>
-                <tr>
-                    <th>{{localize "attributeViewer.tableHeaderAttribute"}}</th>
-                    <th>{{localize "attributeViewer.tableHeaderValue"}}</th>
-                </tr>
-                {{#each attributes}}
-                <tr>
-                    <td><input type="text" value="@{{this.attName}}" readonly /></td>
-                    <td>{{this.attValue}}</td>
-                </tr>
-                {{/each}}
+                <thead>
+                    <tr>
+                        <th>{{localize "actor-attribute-list.attributeViewer.tableHeaderAttribute"}}</th>
+                        <th>{{localize "actor-attribute-list.attributeViewer.tableHeaderValue"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each attributes}}
+                    <tr>
+                        <td><input type="text" value="@{{this.attName}}" readonly /></td>
+                        <td>{{this.attValue}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
             </table>
         </div>
         {{/each}}
+        <script>
+            $("#attributeListFilter").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".attribute-viewer-category table tr").each(function () {
+                    var found = false;
+                    $(this).find("td").each(function () {
+                        var text = $(this).text().toLowerCase();
+                        if (text.includes(value)) {
+                            found = true;
+                            return false; // exit the loop
+                        }
+                    });
+                    if (!found) {
+                        $(this).find("td input").each(function () {
+                            var text = $(this).val().toLowerCase();
+                            if (text.includes(value)) {
+                                found = true;
+                                return false; // exit the loop
+                            }
+                        });
+                    }
+                    if (!found) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        </script>
 </div>
