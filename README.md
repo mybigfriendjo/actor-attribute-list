@@ -1,13 +1,13 @@
-# 5e Actor Attributes
+# Actor Attribute List
 
-Lists all Attributes of a dnd5e Actor Sheet.
+Lists all RollData Attributes of an Actor Sheet for use in Descriptions.
 
 Inspired by [Actor Attribute Lists](https://github.com/relick/FoundryVTT-Actor-Attribute-Lists) Module.
 
 ## Installation
 
 1. Open the Add-on Modules tab in the Configuration and Setup dialog.
-2. Click Install Module and search for "5e Actor Attributes", or use the following manifest URL: `https://raw.githubusercontent.com/mybigfriendjo/5e-actor-attributes/main/module.json`
+2. Click Install Module and search for "5e Actor Attributes", or use the following manifest URL: `https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/main/module.json`
 3. Install the module and activate it for your World using the checkbox in the 'Manage Modules' Dialog.
 
 ## Usage

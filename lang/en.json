@@ -1,11 +1,24 @@
 {
-  "actorSheet": {
-    "headerButtonLabel": "Show Attributes"
-  },
-  "attributeViewer": {
-    "appTitle": "Attributes for",
-    "contentHeader": "Attributes for",
-    "tableHeaderAttribute": "Attribute",
-    "tableHeaderValue": "Value"
+  "actor-attribute-list": {
+    "actorSheet": {
+      "headerButtonLabel": "Show Attributes"
+    },
+    "attributeViewer": {
+      "appTitle": "Attributes for",
+      "contentHeader": "Attributes for",
+      "tableHeaderAttribute": "Attribute",
+      "tableHeaderValue": "Value",
+      "filterPlaceholder": "Type to filter attributes"
+    },
+    "settings": {
+      "maxDepth": {
+        "name": "Max Depth",
+        "hint": "The maximum depth of the RollData Actor tree to display"
+      },
+      "showForDMOnly": {
+        "name": "Show for DM only",
+        "hint": "Display the 'Show Attributes' Header Button only to the DM"
+      }
+    }
   }
 }

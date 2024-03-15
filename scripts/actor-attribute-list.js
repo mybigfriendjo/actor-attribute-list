@@ -1,4 +1,13 @@
-const MODULE_NAME = "5e-actor-attributes";
+const MODULE_CONSTANTS = {
+  MODULE_NAME: "actor-attribute-list",
+  MODULE_TEMPLATE_PATH: "modules/actor-attribute-list/templates/",
+  MODULE_SETTINGS: {
+    SHOW_FOR_DM_ONLY: "showForDMOnly",
+    DEFAULT_SHOW_FOR_DM_ONLY: true,
+    MAX_DEPTH: "maxDepth",
+    DEFAULT_MAX_DEPTH: 10,
+  },
+};
 
 export class AttributeViewer extends Application {
   /**
@@ -15,7 +24,7 @@ export class AttributeViewer extends Application {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "attribute-viewer",
-      template: "modules/" + MODULE_NAME + "/templates/AttributeViewer.hbs",
+      template: MODULE_CONSTANTS.MODULE_TEMPLATE_PATH + "AttributeViewer.hbs",
       popOut: true,
       minimizable: true,
       resizable: true,
@@ -29,11 +38,13 @@ export class AttributeViewer extends Application {
    */
   get title() {
     return (
-      game.i18n.localize("attributeViewer.appTitle") + " " + this.actor.name
+      game.i18n.localize(
+        MODULE_CONSTANTS.MODULE_NAME + ".attributeViewer.appTitle"
+      ) +
+      " " +
+      this.actor.name
     );
   }
-
-  maxDepth = 10;
 
   /**
    * @param {Object} currentAttribute current Attribute Object if it's another collection or Value
@@ -43,7 +54,13 @@ export class AttributeViewer extends Application {
    */
 
   _generateAttributes(currentAttribute, previousString, currentDepth) {
-    if (currentDepth > this.maxDepth) {
+    if (
+      currentDepth >
+      game.settings.get(
+        MODULE_CONSTANTS.MODULE_NAME,
+        MODULE_CONSTANTS.MODULE_SETTINGS.MAX_DEPTH
+      )
+    ) {
       return [];
     }
     let attributes = [];
@@ -92,6 +109,7 @@ export class AttributeViewer extends Application {
    */
   getData() {
     const data = {
+      appID: MODULE_CONSTANTS.MODULE_NAME,
       actorName: this.actor.name,
       categories: this._generateCategories(this.actor.getRollData()),
     };
@@ -99,17 +117,60 @@ export class AttributeViewer extends Application {
   }
 }
 
-Hooks.on("getActorSheet5eCharacterHeaderButtons", (app, buttons) => {
-  if (!game.user.isGM) {
+Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
+  if (
+    game.settings.get(
+      MODULE_CONSTANTS.MODULE_NAME,
+      MODULE_CONSTANTS.MODULE_SETTINGS.SHOW_FOR_DM_ONLY
+    ) &&
+    !game.user.isGM
+  ) {
     return;
   }
   buttons.unshift({
     class: "showAttributes",
     icon: "fas fa-dice",
-    label: game.i18n.localize("actorSheet.headerButtonLabel"),
+    label: game.i18n.localize(
+      MODULE_CONSTANTS.MODULE_NAME + ".actorSheet.headerButtonLabel"
+    ),
     onclick: async () => {
       let actor = app.actor;
       new AttributeViewer(actor).render(true);
     },
   });
+});
+
+Hooks.once("init", () => {
+  game.settings.register(
+    MODULE_CONSTANTS.MODULE_NAME,
+    MODULE_CONSTANTS.MODULE_SETTINGS.SHOW_FOR_DM_ONLY,
+    {
+      name: game.i18n.localize(
+        MODULE_CONSTANTS.MODULE_NAME + ".settings.showForDMOnly.name"
+      ),
+      hint: game.i18n.localize(
+        MODULE_CONSTANTS.MODULE_NAME + ".settings.showForDMOnly.hint"
+      ),
+      scope: "world",
+      config: true,
+      default: MODULE_CONSTANTS.MODULE_SETTINGS.DEFAULT_SHOW_FOR_DM_ONLY,
+      type: Boolean,
+    }
+  );
+  game.settings.register(
+    MODULE_CONSTANTS.MODULE_NAME,
+    MODULE_CONSTANTS.MODULE_SETTINGS.MAX_DEPTH,
+    {
+      name: game.i18n.localize(
+        MODULE_CONSTANTS.MODULE_NAME + ".settings.maxDepth.name"
+      ),
+      hint: game.i18n.localize(
+        MODULE_CONSTANTS.MODULE_NAME + ".settings.maxDepth.hint"
+      ),
+      scope: "world",
+      config: true,
+      default: MODULE_CONSTANTS.MODULE_SETTINGS.DEFAULT_MAX_DEPTH,
+      type: Number,
+    }
+  );
 });
