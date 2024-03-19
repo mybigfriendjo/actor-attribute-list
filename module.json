@@ -7,10 +7,28 @@
       "name": "mybigfriendjo"
     }
   ],
-  "version": "0.1.7",
+  "version": "0.1.8",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "compatibility": {
+          "minimum": "2.4.1",
+          "verified": "3.0.4"
+        }
+      },
+      {
+        "id": "pf2e",
+        "compatibility": {
+          "minimum": "5.14.3",
+          "verified": "5.14.3"
+        }
+      }
+    ]
   },
   "url": "https://github.com/mybigfriendjo/actor-attribute-list",
   "manifest": "https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/main/module.json",
