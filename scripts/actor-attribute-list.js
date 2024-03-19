@@ -1,12 +1,16 @@
-const MODULE_CONSTANTS = {
-  MODULE_NAME: "actor-attribute-list",
-  MODULE_TEMPLATE_PATH: "modules/actor-attribute-list/templates/",
-  MODULE_SETTINGS: {
+import { getDnd5eData } from "./attributes-dnd5e.js";
+import { getPf2eData } from "./attributes-pf2e.js";
+
+const AAL = {
+  NAME: "actor-attribute-list",
+  TEMPLATE_PATH: "modules/actor-attribute-list/templates/",
+  SETTINGS: {
     SHOW_FOR_DM_ONLY: "showForDMOnly",
     DEFAULT_SHOW_FOR_DM_ONLY: true,
     MAX_DEPTH: "maxDepth",
     DEFAULT_MAX_DEPTH: 10,
   },
+  VALID_SYSTEMS: ["dnd5e", "pf2e"],
 };
 
 export class AttributeViewer extends Application {
@@ -24,7 +28,7 @@ export class AttributeViewer extends Application {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       id: "attribute-viewer",
-      template: MODULE_CONSTANTS.MODULE_TEMPLATE_PATH + "AttributeViewer.hbs",
+      template: AAL.TEMPLATE_PATH + "AttributeViewer.hbs",
       popOut: true,
       minimizable: true,
       resizable: true,
@@ -37,102 +41,53 @@ export class AttributeViewer extends Application {
    * @override
    */
   get title() {
-    return (
-      game.i18n.localize(
-        MODULE_CONSTANTS.MODULE_NAME + ".attributeViewer.appTitle"
-      ) +
-      " " +
-      this.actor.name
-    );
-  }
-
-  /**
-   * @param {Object} currentAttribute current Attribute Object if it's another collection or Value
-   * @param {string} previousString current string to be used as a prefix for the attribute name
-   * @param {int} currentDepth current depth of the recursion
-   * @returns Array of key value pairs of the attributes
-   */
-
-  _generateAttributes(currentAttribute, previousString, currentDepth) {
-    if (
-      currentDepth >
-      game.settings.get(
-        MODULE_CONSTANTS.MODULE_NAME,
-        MODULE_CONSTANTS.MODULE_SETTINGS.MAX_DEPTH
-      )
-    ) {
-      return [];
-    }
-    let attributes = [];
-    const type = typeof currentAttribute;
-    if (type === "object") {
-      for (const key in currentAttribute) {
-        const str = previousString + "." + key;
-        attributes = attributes.concat(
-          this._generateAttributes(currentAttribute[key], str, currentDepth + 1)
-        );
-      }
-    } else if (type === "string") {
-      attributes.push({
-        attName: previousString,
-        attValue:
-          currentAttribute.length < 50
-            ? currentAttribute
-            : currentAttribute.substring(0, 50) + "...",
-      });
-    } else if (type === "boolean" || type === "number" || type === "bigint") {
-      attributes.push({
-        attName: previousString,
-        attValue: currentAttribute.toString(),
-      });
-    }
-    return attributes;
-  }
-
-  /**
-   * @param {Object} rollData roll data from the actor
-   * @returns Object with name of character and Array of categories with their attributes
-   */
-  _generateCategories(rollData) {
-    const categories = [];
-    for (const key in rollData) {
-      categories.push({
-        categoryName: key,
-        attributes: this._generateAttributes(rollData[key], key, 0),
-      });
-    }
-    return categories;
+    return game.i18n.localize(AAL.NAME + ".attributeViewer.appTitle") + " " + this.actor.name;
   }
 
   /**
    * @override
    */
   getData() {
+    if (!this.actor) {
+      return {};
+    }
+
+    if (!AAL.VALID_SYSTEMS.includes(game.system.id)) {
+      return {};
+    }
+
+    let categories = [];
+    const maxDepth = game.settings.get(AAL.NAME, AAL.SETTINGS.MAX_DEPTH);
+
+    switch (game.system.id) {
+      case "dnd5e":
+        categories = getDnd5eData(this.actor, maxDepth);
+      case "pf2e":
+        categories = getPf2eData(this.actor, maxDepth);
+    }
+
     const data = {
-      appID: MODULE_CONSTANTS.MODULE_NAME,
+      appID: AAL.NAME,
       actorName: this.actor.name,
-      categories: this._generateCategories(this.actor.getRollData()),
+      categories: categories,
     };
     return data;
   }
 }
 
 Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
-  if (
-    game.settings.get(
-      MODULE_CONSTANTS.MODULE_NAME,
-      MODULE_CONSTANTS.MODULE_SETTINGS.SHOW_FOR_DM_ONLY
-    ) &&
-    !game.user.isGM
-  ) {
+  if (!AAL.VALID_SYSTEMS.includes(game.system.id)) {
     return;
   }
+
+  if (game.settings.get(AAL.NAME, AAL.SETTINGS.SHOW_FOR_DM_ONLY) && !game.user.isGM) {
+    return;
+  }
+
   buttons.unshift({
     class: "showAttributes",
     icon: "fas fa-dice",
-    label: game.i18n.localize(
-      MODULE_CONSTANTS.MODULE_NAME + ".actorSheet.headerButtonLabel"
-    ),
+    label: game.i18n.localize(AAL.NAME + ".actorSheet.headerButtonLabel"),
     onclick: async () => {
       let actor = app.actor;
       new AttributeViewer(actor).render(true);
@@ -140,37 +95,21 @@ Hooks.on("getActorSheetHeaderButtons", (app, buttons) => {
   });
 });
 
-Hooks.once("init", () => {
-  game.settings.register(
-    MODULE_CONSTANTS.MODULE_NAME,
-    MODULE_CONSTANTS.MODULE_SETTINGS.SHOW_FOR_DM_ONLY,
-    {
-      name: game.i18n.localize(
-        MODULE_CONSTANTS.MODULE_NAME + ".settings.showForDMOnly.name"
-      ),
-      hint: game.i18n.localize(
-        MODULE_CONSTANTS.MODULE_NAME + ".settings.showForDMOnly.hint"
-      ),
-      scope: "world",
-      config: true,
-      default: MODULE_CONSTANTS.MODULE_SETTINGS.DEFAULT_SHOW_FOR_DM_ONLY,
-      type: Boolean,
-    }
-  );
-  game.settings.register(
-    MODULE_CONSTANTS.MODULE_NAME,
-    MODULE_CONSTANTS.MODULE_SETTINGS.MAX_DEPTH,
-    {
-      name: game.i18n.localize(
-        MODULE_CONSTANTS.MODULE_NAME + ".settings.maxDepth.name"
-      ),
-      hint: game.i18n.localize(
-        MODULE_CONSTANTS.MODULE_NAME + ".settings.maxDepth.hint"
-      ),
-      scope: "world",
-      config: true,
-      default: MODULE_CONSTANTS.MODULE_SETTINGS.DEFAULT_MAX_DEPTH,
-      type: Number,
-    }
-  );
+Hooks.on("init", () => {
+  game.settings.register(AAL.NAME, AAL.SETTINGS.SHOW_FOR_DM_ONLY, {
+    name: game.i18n.localize(AAL.NAME + ".settings.showForDMOnly.name"),
+    hint: game.i18n.localize(AAL.NAME + ".settings.showForDMOnly.hint"),
+    scope: "world",
+    config: true,
+    default: AAL.SETTINGS.DEFAULT_SHOW_FOR_DM_ONLY,
+    type: Boolean,
+  });
+  game.settings.register(AAL.NAME, AAL.SETTINGS.MAX_DEPTH, {
+    name: game.i18n.localize(AAL.NAME + ".settings.maxDepth.name"),
+    hint: game.i18n.localize(AAL.NAME + ".settings.maxDepth.hint"),
+    scope: "world",
+    config: true,
+    default: AAL.SETTINGS.DEFAULT_MAX_DEPTH,
+    type: Number,
+  });
 });

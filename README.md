@@ -21,3 +21,13 @@ Clicking it opens a new Window with all Attributes of the Actor Sheet in a table
 ![Attribute Window](./assets/attributeWindow.png)
 
 From there you can copy the Attribute Names for use in Text and Descriptions.
+
+Currently i have only added dnd5e and pf2e. Adding additional Systems can be done depending on respective complexity. If you want to add a system, please open an issue or a pull request.
+
+### dnd5e
+
+The Values are pretty straightforward and come from the getRollData() function of the dnd5e Actor Object.
+
+### pf2e
+
+Values come from the actor.system collection. Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https://github.com/foundryvtt/pf2e/wiki/Style-Guide#inline-roll-links) for more information.
