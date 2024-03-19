@@ -1,6 +1,6 @@
 # Actor Attribute List
 
-Lists all RollData Attributes of an Actor Sheet for use in Descriptions.
+Lists all Attributes of an Actor Sheet for use in Descriptions.
 
 Inspired by [Actor Attribute Lists](https://github.com/relick/FoundryVTT-Actor-Attribute-Lists) Module.
 
