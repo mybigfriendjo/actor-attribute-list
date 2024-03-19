@@ -16,7 +16,7 @@ The module adds a new Header Button to the Actor Sheet called "Show Attributes".
 
 ![Header Button](./assets/header_button.png)
 
-Clicking it opens a new Window with all Attributes of the Actor Sheet in a table. The table is divided into sections for each type of attribute (Skills, Abilities, Attributes, etc).
+Clicking it opens a new Window with all Attributes of the Actor Sheet in a table. The table is divided into sections for each type of attribute. Filtering is possible by typing into the search bar at the top of the window. It searches both the Attribute Name and the Attribute Value.
 
 ![Attribute Window](./assets/attributeWindow.png)
 
