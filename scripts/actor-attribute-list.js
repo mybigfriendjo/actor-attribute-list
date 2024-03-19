@@ -62,8 +62,10 @@ export class AttributeViewer extends Application {
     switch (game.system.id) {
       case "dnd5e":
         categories = getDnd5eData(this.actor, maxDepth);
+        break;
       case "pf2e":
         categories = getPf2eData(this.actor, maxDepth);
+        break;
     }
 
     const data = {
