@@ -22,7 +22,11 @@ Clicking it opens a new Window with all Attributes of the Actor Sheet in a table
 
 From there you can copy the Attribute Names for use in Text and Descriptions.
 
-Currently i have only added dnd5e and pf2e. Adding additional Systems can be done depending on respective complexity. If you want to add a system, please open an issue or a pull request.
+Currently i have only added dnd5e and pf2e. Adding additional Systems can be done depending on respective complexity.
+
+If you want a system added, an optional but very helpful step would be confirming that the descriptions of a system are actually enriched to use attributes in the first place. You can do so in the respective game channel in foundry's discord and it might save you the time to open an Issue. [FoundryVTT Discord](https://discord.gg/foundryvtt)
+
+If you get confirmation or are unsure, feel free to open an Issue and i will look into it and add the system if and when i can.
 
 ### dnd5e
 
