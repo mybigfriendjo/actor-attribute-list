@@ -18,7 +18,8 @@
                 <tbody>
                     {{#each attributes}}
                     <tr>
-                        <td><input type="text" value="@{{this.attName}}" readonly /></td>
+                        <td><input class="attribute-viewer-key-field" type="text" value="@{{this.attName}}" readonly />
+                        </td>
                         <td>{{this.attValue}}</td>
                     </tr>
                     {{/each}}

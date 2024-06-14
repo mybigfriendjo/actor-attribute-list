@@ -82,33 +82,45 @@ export class AttributeViewer extends Application {
   activateListeners(html) {
     super.activateListeners(html);
 
-    $(html).find("#attributeListFilter").on("keyup", function () {
-      var value = $(this).val().toLowerCase();
-      $(".attribute-viewer-category table tr").each(function () {
-        var found = false;
-        $(this).find("td").each(function () {
-            var text = $(this).text().toLowerCase();
-            if (text.includes(value)) {
-              found = true;
-              return false; // exit the loop
-            }
-          });
-        if (!found) {
-          $(this).find("td input").each(function () {
-              var text = $(this).val().toLowerCase();
+    $(html)
+      .find("#attributeListFilter")
+      .on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".attribute-viewer-category table tr").each(function () {
+          var found = false;
+          $(this)
+            .find("td")
+            .each(function () {
+              var text = $(this).text().toLowerCase();
               if (text.includes(value)) {
                 found = true;
                 return false; // exit the loop
               }
             });
-        }
-        if (!found) {
-          $(this).hide();
-        } else {
-          $(this).show();
-        }
+          if (!found) {
+            $(this)
+              .find("td input")
+              .each(function () {
+                var text = $(this).val().toLowerCase();
+                if (text.includes(value)) {
+                  found = true;
+                  return false; // exit the loop
+                }
+              });
+          }
+          if (!found) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          }
+        });
       });
-    });
+
+    $(html)
+      .find(".attribute-viewer-key-field")
+      .on("click", function () {
+        $(this).select();
+      });
   }
 }
 

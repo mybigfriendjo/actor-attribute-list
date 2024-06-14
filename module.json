@@ -7,10 +7,10 @@
       "name": "mybigfriendjo"
     }
   ],
-  "version": "0.1.8",
+  "version": "0.1.9",
   "compatibility": {
     "minimum": "11",
-    "verified": "11"
+    "verified": "12"
   },
   "relationships": {
     "systems": [
@@ -18,14 +18,14 @@
         "id": "dnd5e",
         "compatibility": {
           "minimum": "2.4.1",
-          "verified": "3.0.4"
+          "verified": "3.2.1"
         }
       },
       {
         "id": "pf2e",
         "compatibility": {
           "minimum": "5.14.3",
-          "verified": "5.14.3"
+          "verified": "6.0.1"
         }
       }
     ]
