@@ -31,8 +31,8 @@
     ]
   },
   "url": "https://github.com/mybigfriendjo/actor-attribute-list",
-  "manifest": "https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/main/module.json",
-  "download": "https://github.com/mybigfriendjo/actor-attribute-list/archive/main.zip",
+  "manifest": "https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/0.1.8/module.json",
+  "download": "https://github.com/mybigfriendjo/actor-attribute-list/archive/refs/heads/0.1.8.zip",
   "esmodules": ["scripts/actor-attribute-list.js"],
   "styles": ["styles/actor-attribute-list.css"],
   "languages": [
