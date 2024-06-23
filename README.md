@@ -41,7 +41,7 @@ Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https:/
 
 Attributes are taken from actor.getRollData()
 
-## Systems without Editor Enrichment
+## <<< Systems without Editor Enrichment >>>
 
 The following Systems have been added but they do not have the necessary Editor Enrichment to use Attributes in Descriptions.
 
