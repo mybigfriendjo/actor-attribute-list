@@ -28,28 +28,19 @@ If you want a system added, an optional but very helpful step would be confirmin
 
 If you get confirmation or are unsure, feel free to open an Issue and i will look into it and add the system if and when i can.
 
-### dnd5e - Dungeons & Dragons 5th Edition
+## Added Systems
 
-Attributes are taken from actor.getRollData()
+| id    | System | Info |
+| --- | --- | --- |
+| dnd5e | Dungeons & Dragons 5th Edition | Attributes are taken from actor.getRollData() |
+| pf2e  | Pathfinder 2nd Edition | Attributes are taken from the actor.system collection.<br>Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https://github.com/foundryvtt/pf2e/wiki/Style-Guide#inline-roll-links) for more information. |
+| swade | Savage Worlds Adventure Edition | Attributes are taken from actor.getRollData() |
 
-### pf2e - Pathfinder 2nd Edition
-
-Attributes are taken from the actor.system collection.
-Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https://github.com/foundryvtt/pf2e/wiki/Style-Guide#inline-roll-links) for more information.
-
-### swade - Savage Worlds Adventure Edition
-
-Attributes are taken from actor.getRollData()
-
-## <<< Systems without Editor Enrichment >>>
+## Systems without Editor Enrichment
 
 The following Systems have been added but they do not have the necessary Editor Enrichment to use Attributes in Descriptions.
 
-### ose - Old School Essentials
-
-Attributes are taken from actor.getRollData()
-
-### wwn - Worlds Without Number
-
-The system is based on Old School Essentials.
-Attributes are taken from actor.getRollData()
+| id  | System                | Info                                          |
+| --- | --------------------- | --------------------------------------------- |
+| ose | Old School Essentials | Attributes are taken from actor.getRollData() |
+| wwn | Worlds Without Number | Attributes are taken from actor.getRollData() |
