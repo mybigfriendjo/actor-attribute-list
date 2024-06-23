@@ -14,7 +14,11 @@ export function generateAttributes(currentAttribute, previousString, currentDept
   const type = typeof currentAttribute;
   if (type === "object") {
     for (const key in currentAttribute) {
-      const newString = previousString + "." + key;
+      let newString = "";
+      if (previousString != "") {
+        newString = previousString + ".";
+      }
+      newString += key;
       attributes = attributes.concat(
         generateAttributes(currentAttribute[key], newString, currentDepth + 1, maxDepth)
       );

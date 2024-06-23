@@ -18,6 +18,10 @@
       "showForDMOnly": {
         "name": "Show for DM only",
         "hint": "Display the 'Show Attributes' Header Button only to the DM"
+      },
+      "systemWarning": {
+        "name": "System Warning",
+        "hint": "Shows a warning chat message if the system does not enrich Descriptions with RollData. Only shown once, then it is automatically deactivated."
       }
     }
   }

@@ -1,5 +1,14 @@
 import { getDnd5eData } from "./attributes-dnd5e.js";
+import { getOSEData } from "./attributes-ose.js";
 import { getPf2eData } from "./attributes-pf2e.js";
+import { getSWADEData } from "./attributes-swade.js";
+import { getWWNData } from "./attributes-wwn.js";
+
+const SYSTEM_DND5E = "dnd5e";
+const SYSTEM_OSE = "ose";
+const SYSTEM_PF2E = "pf2e";
+const SYSTEM_SWADE = "swade";
+const SYSTEM_WWN = "wwn";
 
 const AAL = {
   NAME: "actor-attribute-list",
@@ -9,8 +18,11 @@ const AAL = {
     DEFAULT_SHOW_FOR_DM_ONLY: true,
     MAX_DEPTH: "maxDepth",
     DEFAULT_MAX_DEPTH: 10,
+    SHOW_SYSTEM_WARNING: "systemWarning",
+    DEFAULT_SHOW_SYSTEM_WARNING: true,
   },
-  VALID_SYSTEMS: ["dnd5e", "pf2e"],
+  VALID_SYSTEMS: [SYSTEM_DND5E, SYSTEM_OSE, SYSTEM_PF2E, SYSTEM_SWADE, SYSTEM_WWN],
+  NON_ENRICHED_SYSTEMS: [SYSTEM_OSE, SYSTEM_WWN],
 };
 
 export class AttributeViewer extends Application {
@@ -60,11 +72,20 @@ export class AttributeViewer extends Application {
     const maxDepth = game.settings.get(AAL.NAME, AAL.SETTINGS.MAX_DEPTH);
 
     switch (game.system.id) {
-      case "dnd5e":
+      case SYSTEM_DND5E:
         categories = getDnd5eData(this.actor, maxDepth);
         break;
-      case "pf2e":
+      case SYSTEM_OSE:
+        categories = getOSEData(this.actor, maxDepth);
+        break;
+      case SYSTEM_PF2E:
         categories = getPf2eData(this.actor, maxDepth);
+        break;
+      case SYSTEM_SWADE:
+        categories = getSWADEData(this.actor, maxDepth);
+        break;
+      case SYSTEM_WWN:
+        categories = getWWNData(this.actor, maxDepth);
         break;
     }
 
@@ -94,7 +115,7 @@ export class AttributeViewer extends Application {
               var text = $(this).text().toLowerCase();
               if (text.includes(value)) {
                 found = true;
-                return false; // exit the loop
+                return false;
               }
             });
           if (!found) {
@@ -104,7 +125,7 @@ export class AttributeViewer extends Application {
                 var text = $(this).val().toLowerCase();
                 if (text.includes(value)) {
                   found = true;
-                  return false; // exit the loop
+                  return false;
                 }
               });
           }
@@ -161,4 +182,34 @@ Hooks.on("init", () => {
     default: AAL.SETTINGS.DEFAULT_MAX_DEPTH,
     type: Number,
   });
+
+  if (AAL.NON_ENRICHED_SYSTEMS.includes(game.system.id)) {
+    game.settings.register(AAL.NAME, AAL.SETTINGS.SHOW_SYSTEM_WARNING, {
+      name: game.i18n.localize(AAL.NAME + ".settings.systemWarning.name"),
+      hint: game.i18n.localize(AAL.NAME + ".settings.systemWarning.hint"),
+      scope: "world",
+      config: true,
+      default: AAL.SETTINGS.DEFAULT_SHOW_SYSTEM_WARNING,
+      type: Boolean,
+    });
+  }
+});
+
+Hooks.on("ready", () => {
+  if (AAL.NON_ENRICHED_SYSTEMS.includes(game.system.id)) {
+    if (game.settings.get(AAL.NAME, AAL.SETTINGS.SHOW_SYSTEM_WARNING) && game.user.isGM) {
+      ChatMessage.create({
+        content: `<div>
+                        <p>Message from Module "Actor Attribute List"</p>
+                        <p>While the Module is available and will show Attributes for an Actor Sheet, to my current knowledge the System does not enrich Descriptions.
+                        This means you likely won't get automatic Inline Rolls and similar things.</p>
+                        <p>This is up to the System to implement. I hope the Attributes will still help as informational Values.</p>
+                    </div>`,
+        user: game.userId,
+        type: CONST.CHAT_MESSAGE_TYPES.WHISPER,
+        whisper: [game.userId],
+      });
+      game.settings.set(AAL.NAME, AAL.SETTINGS.SHOW_SYSTEM_WARNING, false);
+    }
+  }
 });
