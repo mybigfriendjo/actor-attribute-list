@@ -61,12 +61,8 @@
   "url": "https://github.com/mybigfriendjo/actor-attribute-list",
   "manifest": "https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/main/module.json",
   "download": "https://github.com/mybigfriendjo/actor-attribute-list/archive/main.zip",
-  "esmodules": [
-    "scripts/actor-attribute-list.js"
-  ],
-  "styles": [
-    "styles/actor-attribute-list.css"
-  ],
+  "esmodules": ["scripts/actor-attribute-list.js"],
+  "styles": ["styles/actor-attribute-list.css"],
   "languages": [
     {
       "lang": "en",
