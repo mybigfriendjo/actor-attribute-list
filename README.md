@@ -30,10 +30,11 @@ If you get confirmation or are unsure, feel free to open an Issue and i will loo
 
 ## Added Systems
 
-| id    | System | Info |
-| --- | --- | --- |
-| dnd5e | Dungeons & Dragons 5th Edition | Attributes are taken from actor.getRollData() |
-| pf2e  | Pathfinder 2nd Edition | Attributes are taken from the actor.system collection.<br>Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https://github.com/foundryvtt/pf2e/wiki/Style-Guide#inline-roll-links) for more information. |
+| id    | System                          | Info |
+|-------|---------------------------------| --- |
+| dcc   | Dungeon Crawl Classics          | Attributes are taken from actor.getRollData() |
+| dnd5e | Dungeons & Dragons 5th Edition  | Attributes are taken from actor.getRollData() |
+| pf2e  | Pathfinder 2nd Edition          | Attributes are taken from the actor.system collection.<br>Not all Values can be used as-is. Please refer to the [pf2e Style-Guide](https://github.com/foundryvtt/pf2e/wiki/Style-Guide#inline-roll-links) for more information. |
 | swade | Savage Worlds Adventure Edition | Attributes are taken from actor.getRollData() |
 
 ## Systems without Editor Enrichment
