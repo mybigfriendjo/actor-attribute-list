@@ -15,6 +15,13 @@
   "relationships": {
     "systems": [
       {
+        "id": "dcc",
+        "compatibility": {
+          "minimum": "0.41.0",
+          "verified": "0.42.0"
+        }
+      },
+      {
         "id": "dnd5e",
         "compatibility": {
           "minimum": "2.4.1",
@@ -54,8 +61,12 @@
   "url": "https://github.com/mybigfriendjo/actor-attribute-list",
   "manifest": "https://raw.githubusercontent.com/mybigfriendjo/actor-attribute-list/main/module.json",
   "download": "https://github.com/mybigfriendjo/actor-attribute-list/archive/main.zip",
-  "esmodules": ["scripts/actor-attribute-list.js"],
-  "styles": ["styles/actor-attribute-list.css"],
+  "esmodules": [
+    "scripts/actor-attribute-list.js"
+  ],
+  "styles": [
+    "styles/actor-attribute-list.css"
+  ],
   "languages": [
     {
       "lang": "en",
