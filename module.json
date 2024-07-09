@@ -15,6 +15,13 @@
   "relationships": {
     "systems": [
       {
+        "id": "dcc",
+        "compatibility": {
+          "minimum": "0.41.0",
+          "verified": "0.42.0"
+        }
+      },
+      {
         "id": "dnd5e",
         "compatibility": {
           "minimum": "2.4.1",

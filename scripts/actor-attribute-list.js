@@ -1,9 +1,11 @@
+import { getDCCData } from "./attributes-dcc.js";
 import { getDnd5eData } from "./attributes-dnd5e.js";
 import { getOSEData } from "./attributes-ose.js";
 import { getPf2eData } from "./attributes-pf2e.js";
 import { getSWADEData } from "./attributes-swade.js";
 import { getWWNData } from "./attributes-wwn.js";
 
+const SYSTEM_DCC = "dcc";
 const SYSTEM_DND5E = "dnd5e";
 const SYSTEM_OSE = "ose";
 const SYSTEM_PF2E = "pf2e";
@@ -21,7 +23,7 @@ const AAL = {
     SHOW_SYSTEM_WARNING: "systemWarning",
     DEFAULT_SHOW_SYSTEM_WARNING: true,
   },
-  VALID_SYSTEMS: [SYSTEM_DND5E, SYSTEM_OSE, SYSTEM_PF2E, SYSTEM_SWADE, SYSTEM_WWN],
+  VALID_SYSTEMS: [SYSTEM_DCC, SYSTEM_DND5E, SYSTEM_OSE, SYSTEM_PF2E, SYSTEM_SWADE, SYSTEM_WWN],
   NON_ENRICHED_SYSTEMS: [SYSTEM_OSE, SYSTEM_WWN],
 };
 
@@ -72,6 +74,9 @@ export class AttributeViewer extends Application {
     const maxDepth = game.settings.get(AAL.NAME, AAL.SETTINGS.MAX_DEPTH);
 
     switch (game.system.id) {
+      case SYSTEM_DCC:
+        categories = getDCCData(this.actor, maxDepth);
+        break;
       case SYSTEM_DND5E:
         categories = getDnd5eData(this.actor, maxDepth);
         break;
