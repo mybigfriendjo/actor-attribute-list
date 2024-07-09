@@ -7,7 +7,7 @@
       "name": "mybigfriendjo"
     }
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "compatibility": {
     "minimum": "11",
     "verified": "12"
@@ -29,20 +29,6 @@
         }
       },
       {
-        "id": "pf2e",
-        "compatibility": {
-          "minimum": "5.14.3",
-          "verified": "6.0.4"
-        }
-      },
-      {
-        "id": "wwn",
-        "compatibility": {
-          "minimum": "1.3.0",
-          "verified": "1.4.5"
-        }
-      },
-      {
         "id": "ose",
         "compatibility": {
           "minimum": "1.9.4",
@@ -50,10 +36,24 @@
         }
       },
       {
+        "id": "pf2e",
+        "compatibility": {
+          "minimum": "5.14.3",
+          "verified": "6.0.4"
+        }
+      },
+      {
         "id": "swade",
         "compatibility": {
           "minimum": "3.4.1",
           "verified": "3.4.1"
+        }
+      },
+      {
+        "id": "wwn",
+        "compatibility": {
+          "minimum": "1.3.0",
+          "verified": "1.4.5"
         }
       }
     ]
