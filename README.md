@@ -1,3 +1,9 @@
+The official repository for this module has moved to [a new place](https://gitpage.xyz/mybigfriendjo/actor-attribute-list)
+
+This repository is kept as archive for old modules that still have github URLs in use and would otherwise break.
+
+# ------------------------------
+
 # Actor Attribute List
 
 Lists all Attributes of an Actor Sheet for use in Descriptions.
